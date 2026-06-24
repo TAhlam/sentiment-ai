@@ -3,11 +3,12 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/TAhlam/sentiment-ai.git'
-            }
-        }
+stage('Checkout') {
+    steps {
+        git branch: 'main',
+            url: 'https://github.com/TAhlam/sentiment-ai.git'
+    }
+}
 
         stage('Install Dependencies') {
             steps {
