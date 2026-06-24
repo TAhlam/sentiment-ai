@@ -12,7 +12,7 @@ pipeline {
         stage('Install Dependencies') {
     steps {
         bat '''
-        py -3.11 -m venv venv
+        "C:\\Users\\Taourirt\\AppData\\Local\\Programs\\Python\\Python311\\python.exe" -m venv venv
         venv\\Scripts\\python -m pip install --upgrade pip
         venv\\Scripts\\pip install -r requirements.txt
         '''
@@ -20,9 +20,9 @@ pipeline {
 }
 
         stage('Run Tests') {
-            steps {
-               bat 'venv\\Scripts\\pytest tests -v'
-            }
-        }
+    steps {
+        bat 'venv\\Scripts\\pytest tests -v'
+    }
+}
     }
 }
