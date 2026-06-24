@@ -3,27 +3,26 @@ pipeline {
 
     stages {
 
-stage('Checkout') {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Install Dependencies') {
     steps {
-        git branch: 'main',
-            url: 'https://github.com/TAhlam/sentiment-ai.git'
+        bat '''
+        py -3.11 -m venv venv
+        venv\\Scripts\\python -m pip install --upgrade pip
+        venv\\Scripts\\pip install -r requirements.txt
+        '''
     }
 }
 
-        stage('Install Dependencies') {
-            steps {
-                bat '''
-                python -m pip install --upgrade pip
-                pip install -r requirements.txt
-                '''
-            }
-        }
-
         stage('Run Tests') {
             steps {
-                bat 'pytest tests -v'
+               bat 'venv\\Scripts\\pytest tests -v'
             }
         }
-
     }
 }
